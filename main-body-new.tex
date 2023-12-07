@@ -28,7 +28,7 @@
 
 
 % 定义一个名为 \revised 的宏，该宏接受一个参数，即要设置颜色的文本内容
-\newcommand{\revised}[1]{{\textcolor{cyan}{#1}}}
+\newcommand{\revised}[1]{{\textcolor{black}{#1}}}
 
 
 % ---------------------------------------------------------------------------- %
@@ -49,13 +49,14 @@
 	Hong Qin,~\IEEEmembership{Member,~IEEE}
 	\IEEEcompsocitemizethanks{%\IEEEcompsocthanksitem J. Li is with the State Key Laboratory of Virtual Reality Technology and Systems, Beihang University, Beijing 100191, China.
 
-		\IEEEcompsocthanksitem C. Li, Y. Gao, J. He, T. Cheng, S. Li and A. Hao are with the State Key Laboratory of Virtual Reality Technology and Systems, and Beijing Advanced Innovation Center for Biomedical Engineering, Beihang University, Beijing 100191, China, and also with the Research Unit of Virtual Body and Virtual Surgery (2019RU004), Chinese Academy of Medical Sciences, Beijing 100050, China.
+		\IEEEcompsocthanksitem C. Li, Y. Gao, J. He, T. Cheng, S. Li and A. Hao are with the State Key Laboratory of Virtual Reality Technology and Systems, and the Beijing Advanced Innovation Center for Biomedical Engineering, Beihang University, Beijing 100191, China, and also with the Research Unit of Virtual Body and Virtual Surgery (2019RU004), Chinese Academy of Medical Sciences, Beijing 100050, China.
 
 		\IEEEcompsocthanksitem S. Li and A. Hao are with Peng Cheng Laboratory, Shenzhen 518066, China.
 		\IEEEcompsocthanksitem S. Li is also with Zhongguancun Laboratory, Beijing 100094, China.
 		% note need leading \protect in front of \\ to get a newline within \thanks as
 		% \\ is fragile and will error, could use \hfil\break instead.
-		\IEEEcompsocthanksitem H. Qin is with Department of Computer Science, Stony Brook University (SUNY at Stony Brook), Stony Brook, New York 11794-2424, USA.}% <-this % stops a space
+		\IEEEcompsocthanksitem H. Qin is with the Department of Computer Science, Stony Brook University (SUNY at Stony Brook), New York 11794-2424, USA.
+USA}% <-this % stops a space
 
 	}
 
@@ -91,10 +92,10 @@
 \section{Introduction}
 
 
-From melting ice cream, ketchup, to human blood, non-Newtonian materials are everywhere in our daily lives. In contrast to Newtonian fluids, non-Newtonian fluids display a non-linear relationship between stress and strain rate, making them versatile and exhibit variable properties that are different from those of traditional solids and fluids. In fact, non-Newtonian materials can be seen as materials in-between solids and fluids, and therefore possess characteristics of both. By simulating these interesting non-Newtonian behaviors, we can create better physically-based animations for Computer Graphics (CG) applications.
+From melting ice cream and ketchup to human blood, non-Newtonian materials are everywhere in our daily lives. In contrast to Newtonian fluids, non-Newtonian fluids display a non-linear relationship between stress and strain rate, making them versatile and exhibiting variable properties that are different from those of traditional solids and fluids. In fact, non-Newtonian materials can be seen as materials in-between solids and fluids and therefore possess characteristics of both. By simulating these interesting non-Newtonian behaviors, we can create better physically-based animations for computer graphics applications.
 
-Traditionally, there are two routes to simulate non-Newtonian materials in existing research. The first approach is to use a highly viscous fluid to mimic solid-like behaviour. This type of work dates back to Stora~\cite{Stora1999}. The key to success in this approach is to design a stable viscosity solver that can withstand drastic changes in viscosity~\cite{Peer2015,Goldade2019-Adaptive-Octree-Viscosity}. \revised{However, these methods are limited by viscous stress. Regardless of how large the viscous stress is, it solely influences the deformation rate and not the degree of deformation,  meaning that elastic effects are not expected.
-Therefore, the non-Newtonian material produced by this method may not truly be “solid-like”.} The second approach is the opposite, simulating materials from the elasticity theory and making them fluid-like. Recent works in Material Point Methods (MPM) fall under this category~\cite{Stomakhin2014,Su2021}. In comparison to the traditional Finite Element Method (FEM), MPM allows for the movement of Gaussian integral points, enabling the material to flow and giving it the ability to simulate various materials with complex, variable properties, including non-Newtonian materials. However, MPM faces the numerical adhesion problem. For low-resolution simulations with a small number of grid cells, the material may adhere together. This is because all information needs to be transferred to the grid to calculate the stress and update the deformation gradient, which limits the grid resolution and thus the resolution of the entire simulation. The material points belonging to different objects will be gathered into the same grid point and will never split again. Increasing the grid resolution will alleviate the problem, but the increase in complexity will limit the computational efficiency of the simulation.
+Traditionally, there are two routes to simulate non-Newtonian materials in existing research. The first approach is to use a highly viscous fluid to mimic solid-like behaviour. This type of work dates back to Stora~\cite{Stora1999}. The key to success in this approach is to design a stable viscosity solver that can withstand drastic changes in viscosity~\cite{Peer2015,Goldade2019-Adaptive-Octree-Viscosity}. \revised{However, these methods are limited by viscous stress. Regardless of how large the viscous stress is, it solely influences the deformation rate and not the degree of deformation, meaning that elastic effects are not expected.
+Therefore, the non-Newtonian material produced by this method may not truly be “solid-like”.} The second approach is the opposite, simulating materials from the elasticity theory and making them fluid-like. Recent works in Material Point Methods (MPM) fall under this category~\cite{Stomakhin2014,Su2021}. In comparison to the traditional Finite Element Method (FEM), MPM allows for the movement of Gaussian integral points, enabling the material to flow and giving it the ability to simulate various materials with complex, variable properties, including non-Newtonian materials. However, MPM faces a numerical adhesion problem. For low-resolution simulations with a small number of grid cells, the material may adhere together. This is because all information needs to be transferred to the grid to calculate the stress and update the deformation gradient, which limits the grid resolution and thus the resolution of the entire simulation. The material points belonging to different objects will be gathered into the same grid point and will never split again. Increasing the grid resolution will alleviate the problem, but the increase in complexity will limit the computational efficiency of the simulation.
 
 In this research, we aim to effectively simulate non-Newtonian materials with physical properties that range from viscous fluids to deformable solids. We introduce the physics-based elastic stress to the Smoothed Particle Hydrodynamics (SPH) solver~\cite{koschier2022survey}, thus combining the fluid-like resistance and the solid-like resistance within a unified framework. A notable merit of this practice compared to current viscous SPH methods is that our model is fully resistant to any non-Newtonian deformation. Moreover, we empower our method with the capability of simulating various strain rate-dependent materials, including shear-thinning, shear-thickening, Bingham plastic, and more. By utilizing our unified framework, which combines an elasto-plastic solver with a viscosity solver, we are able to achieve sufficient and realistic non-Newtonian phenomena.
 
@@ -115,17 +116,17 @@ Meanwhile, we also implement the diffusion equation to simulate the heat-based p
 
 
 \subsection{Variable Viscosity for Non-Newtonian Material}
-One of the key characteristics of non-Newtonian material is that it has variable viscosity. Variable viscosity is a long-discussed issue in computer graphics. Stora et al.~\cite{Stora1999} pioneered in this field by simulating the lava with a high and variable viscosity in 1999. \revised{Carlson et al.~\cite{Carlson2002} enhanced the numerical stability of algorithms under high viscosity for simulating phenomena, such as wax melting.} Batty et al.~\cite{Batty2008-accurate-viscous} developed a variational principle-based Eulerian fluid solver that focuses on the accuracy of complex boundary conditions of viscous flow. Larionov et al.~\cite{Larionov2017-variationalStokes} designed a Stokes flow solver that is unconditionally stable when simulating highly viscous phenomena like buckling and coiling. Goldade et al.~\cite{Goldade2019-Adaptive-Octree-Viscosity} designed an adaptive variational finite difference framework for octrees that is capable of simulating variable viscosity.  Shao et al.~\cite{Shao-Huang2022-unsmoothed} developed a high-resolution algebraic multigrid viscosity solver capable of simulating fluids with variable viscosity.
+One of the key characteristics of non-Newtonian material is that it has variable viscosity. Variable viscosity is a long-discussed issue in computer graphics. Stora et al.~\cite{Stora1999} pioneered in this field by simulating the lava with a high and variable viscosity in 1999. \revised{Carlson et al.~\cite{Carlson2002} enhanced the numerical stability of algorithms under high viscosity for simulating phenomena, such as wax melting.} Batty et al.~\cite{Batty2008-accurate-viscous} developed a variational principle-based Eulerian fluid solver that focuses on the accuracy of complex boundary conditions of viscous flow. Larionov et al.~\cite{Larionov2017-variationalStokes} designed a Stokes flow solver that is unconditionally stable when simulating highly viscous phenomena like buckling and coiling. \revised{Goldade et al.~\cite{Goldade2019-Adaptive-Octree-Viscosity} designed an adaptive variational finite difference framework for octrees that is capable of simulating variable viscosity.}  Shao et al.~\cite{Shao-Huang2022-unsmoothed} developed a high-resolution algebraic multigrid viscosity solver capable of simulating fluids with variable viscosity.
 
-\revised{The above-mentioned research works are based on the Eulerian viewpoint or hybrid viewpoint. Additionally, there are several studies that utilize the Lagrangian solver~\cite{Muller2004-elastic-plastic-melting,Solenthaler2007}.} The SPH method can be traced back to Monaghan~\cite{Monaghan1992}. Muller et al.~\cite{Muller03-SPH} introduced an equation-of-state based approach to enforce the incompressibility. \revised{Zhu et al.~\cite{Zhu2015-nonNewton} put forward a codimensional non-Newtonian viscosity fluid simulator based on Fluid Implicit Particle (FLIP).} The Carreu-Yasuda model is used to calculate shear thinning and shear thickening, while the Beverly-Tanner model is used to calculate Bingham plastic. This model was further developed into a Weakly Compressible SPH (WCSPH) by Becker et al.~\cite{Becker2007-WCSPH}. Subsequently, numerous variants of SPH have been introduced to address incompressibility with greater efficiency, including the Predictive–Corrective Incompressible SPH (PCISPH)~\cite{Solenthaler2009-PCISPH}, Implicit Incompressible SPH (IISPH)~\cite{Ihmsen14-IISPH}, and Divergence-Free SPH (DFSPH)~\cite{Bender2017-DFSPH}. As for the viscosity in SPH, Koschier et al.~\cite{Koschier2019-Tut} reviewed the recent works among the SPH viscous solvers. The XSPH~\cite {Monaghan1992,Bridson2012-XSPH} is an explicit solver that takes advantage of the fact that viscosity is caused by the difference in velocities of fluid blobs. Takahashi et al.~\cite{Takahashi2015} used a second-ring neighbourhood to tackle the inconsistency issue of second-order derivatives of SPH. Peer et al.~\cite{Peer2015} decomposed the velocity gradient and reassembled it with a limited strain rate tensor to mimic the viscosity behavior. \revised{ Similarly, Peer and Teschner~\cite{Peer2017-Prescribed} used the prescribed velocity gradient to simulate the viscous fluid.}  Bender and Koschier~\cite{Bender2017-DFSPH} constrained the strain rate by a user-defined parameter to simulate viscosity. And Weiler et al.~\cite{Weiler2018-viscosity} solved the Laplacian formula in an implicit scheme, taking into account the boundary particles and treating them with their conjugate gradient solver.   \revised{Andrade et al.~\cite{Andrade2015} utilized a SPH based method to simulate the non-Newtonian viscosity with Cross model and accelerated the performance with CUDA.}
+\revised{The above-mentioned research works are based on the Eulerian viewpoint or hybrid viewpoint. Additionally, there are several studies that utilize the Lagrangian solver~\cite{Muller2004-elastic-plastic-melting,Solenthaler2007}.} The SPH method can be traced back to Monaghan~\cite{Monaghan1992}. Muller et al.~\cite{Muller03-SPH} introduced an equation-of-state based approach to enforce the incompressibility. \revised{Zhu et al.~\cite{Zhu2015-nonNewton} put forward a codimensional non-Newtonian viscosity fluid simulator based on Fluid Implicit Particle (FLIP), where Carreu-Yasuda model is used to calculate shear thinning and shear thickening.} Muller's model was further developed into a Weakly Compressible SPH (WCSPH) by Becker et al.~\cite{Becker2007-WCSPH}. Subsequently, numerous variants of SPH have been introduced to address incompressibility with greater efficiency, including the Predictive–Corrective Incompressible SPH (PCISPH)~\cite{Solenthaler2009-PCISPH}, Implicit Incompressible SPH (IISPH)~\cite{Ihmsen14-IISPH}, and Divergence-Free SPH (DFSPH)~\cite{Bender2017-DFSPH}. As for the viscosity in SPH, Koschier et al.~\cite{Koschier2019-Tut} reviewed the recent works among the SPH viscous solvers. The XSPH~\cite {Monaghan1992,Bridson2012-XSPH} is an explicit solver that takes advantage of the fact that viscosity is caused by the difference in velocities of fluid blobs. Takahashi et al.~\cite{Takahashi2015} used a second-ring neighbourhood to tackle the inconsistency issue of second-order derivatives of SPH. Peer et al.~\cite{Peer2015} decomposed the velocity gradient and reassembled it with a limited strain rate tensor to mimic the viscosity behavior. \revised{ Similarly, Peer and Teschner~\cite{Peer2017-Prescribed} used the prescribed velocity gradient to simulate the viscous fluid.}  Bender and Koschier~\cite{Bender2017-DFSPH} constrained the strain rate by a user-defined parameter to simulate viscosity. And Weiler et al.~\cite{Weiler2018-viscosity} solved the Laplacian formula in an implicit scheme, taking into account the boundary particles and treating them with their conjugate gradient solver.   \revised{Andrade et al.~\cite{Andrade2015} utilized a SPH based method to simulate the non-Newtonian viscosity with Cross model and accelerated the performance with CUDA.}
 
 
 
 
 \subsection{Visco-elasticity and Visco-plasticity}
-Another key characteristic of non-Newtonian material is the visco-elasticity and visco-plasticity. These materials possess properties of both the solid and liquid states~\cite{gao2021simulating}. The study of visco-elastic and visco-plastic materials has long been a topic of interest among researchers. The interest in these materials can be traced back to Terzopoulos et al. in 1989~\cite{Terzopoulos1989}, when Terzopoulos simulated visco-elastic material by manipulating the integration point of FEM. Losasso et al.~\cite{Losasso2006} tracked the level set of different materials, including solid, so their solver is capable of simulating multiple materials with distinct and variable physical properties. Similarly, Fujisawa et al.~\cite{Fujisawa2007} adopted the Volume of Fluid method to track the boundary when simulating the ice melting. The concepts of viscosity and elasticity can be unified in terms of stress. Observing from the outcome,they both produce a limited degree of stress and hence inhibit mobility. Viscosity takes strain rate as input, whereas elasticity takes strain as input. Goktekin et al al.~\cite{Goktekin2004} took this thought further by incorporating the elastic stress into the Navier-Stokes equations in order to simulate viscoelasticity. They used this method to simulate the jelly in the Marker And Cell (MAC) framework. Muller et al.~\cite{Muller2004-elastic-plastic-melting} tackled the unified particle system to simulate elastic, plastic, and melting objects. They calculated the stress based on the traditional FEM but discretized it on particles. Becker et al.~\cite{Becker2009} followed this idea and implemented elasticity in a SPH framework.
+Another key characteristic of non-Newtonian material is the visco-elasticity and visco-plasticity. These materials possess properties of both the solid and liquid states~\cite{gao2021simulating}. The study of visco-elastic and visco-plastic materials has long been a topic of interest among researchers. \revised{The interest in these materials can be traced back to Terzopoulos et al. in 1989~\cite{Terzopoulos1989}, when Terzopoulos simulated visco-elastic material by manipulating the integration point of FEM.} Losasso et al.~\cite{Losasso2006} tracked the level set of different materials, including solid, so their solver is capable of simulating multiple materials with distinct and variable physical properties. Similarly, Fujisawa et al.~\cite{Fujisawa2007} adopted the Volume of Fluid method to track the boundary when simulating the ice melting. The concepts of viscosity and elasticity can be unified in terms of stress. Observing from the outcome,they both produce a limited degree of stress and hence inhibit mobility. Viscosity takes strain rate as input, whereas elasticity takes strain as input. Goktekin et al al.~\cite{Goktekin2004} took this thought further by incorporating the elastic stress into the Navier-Stokes equations in order to simulate viscoelasticity. They used this method to simulate the jelly in the Marker And Cell (MAC) framework. Muller et al.~\cite{Muller2004-elastic-plastic-melting} tackled the unified particle system to simulate elastic, plastic, and melting objects. They calculated the stress based on the traditional FEM but discretized it on particles. Becker et al.~\cite{Becker2009} followed this idea and implemented elasticity in a SPH framework.
 
-Meanwhile, \revised{plasticity and elasticity are inseparable parts of Newtonian behaviors.} O'Brien et al.~\cite {OBrien2002} provided a solution to simulate the effect of plasticity. When the elasticity strain (or stress) exceeds a criterion, it will be constrained by the plastic law. Such a criterion is von Mises criterion in their work, and the limit is the elastic limit. A further increasing elastic strain will encounter another limit, the plastic limit. The object will fracture if the plastic limit is exceeded. A significant distinction between elasticity and plasticity is that plasticity is a history-dependent quantity that requires updating and accumulation at each time step. Muller et al.~\cite{Muller2004-elastic-plastic-melting} and~\cite{Solenthaler2007} adopted this method to simulate plasticity in the particle method. Another common practise to treat plasticity is to separate the deformation gradient into two components, the elastic component and the plastic component. This practise is adopted by Stomakhin et al.~\cite{Stomakhin2013-snow} during the simulation of snow, where the snow shows both elasticity and plasticity. Similar to O'Brien's work, there are two thresholds for elasticity and plasticity. \revised{Yue et al.\cite{Yue2015} used MPM to simulate the foam, which is a typical Bingham type non-Newtonian material. Their constitutive correlation is based on the Herschel-Bulkley model.} More related works of MPM ~\cite{Su2021,gao2019efficient,Fang2019-sillyRubber,Gao2018-GPU-MPM} can be classified into this type. \revised{Gissler et al.~\cite{Gissler2020-snow} simulated the snow with SPH. their work refers to the visco-elastic model developed by Stomakhin et al.~\cite{Stomakhin2014} et al.} \revised{Bargteil et al.~\cite{Bargteil-2007-AFE} used FEM to simulate the visco-plastic flow. To tackle the potential problem of the ill-conditioned mesh after large deformation, they used a re-mesh procedure.} \revised{Wojtan and Turk~\cite{Wojtan2008} took a similar strategy with Bargteil et al.~\cite{Bargteil-2007-AFE} to simulate the visco-elastic behavior. They carefully distinguished the situation for remeshing. With the spatial adaptivity technique, their algorithm achieves an order-of-magnitude speedup.} \revised{Ozgen et al.~\cite{Ozgen2019} simulated the behavior of shear thickening fluids with SPH model. The key factor in their method is to use a spring to capture the nonlinearity of the non-Newtonian behavior.}
+Meanwhile, \revised{plasticity and elasticity are inseparable parts of Newtonian behaviors.} O'Brien et al.~\cite {OBrien2002} provided a solution to simulate the effect of plasticity. When the elasticity strain (or stress) exceeds a criterion, it will be constrained by the plastic law. Such a criterion is von Mises criterion in their work, and the limit is the elastic limit. A further increasing elastic strain will encounter another limit, the plastic limit. The object will fracture if the plastic limit is exceeded. A significant distinction between elasticity and plasticity is that plasticity is a history-dependent quantity that requires updating and accumulation at each time step. Muller et al.~\cite{Muller2004-elastic-plastic-melting} and Solenthaler et al. ~\cite{Solenthaler2007} adopted this method to simulate plasticity in the particle method. Another common practise to treat plasticity is to separate the deformation gradient into two components, the elastic component and the plastic component. This practise is adopted by Stomakhin et al.~\cite{Stomakhin2013-snow} during the simulation of snow, where the snow shows both elasticity and plasticity. Similar to O'Brien's work, there are two thresholds for elasticity and plasticity. \revised{Yue et al.\cite{Yue2015} used MPM to simulate the foam, which is a typical Bingham type non-Newtonian material. Their constitutive correlation is based on the Herschel-Bulkley model.} More related works of MPM ~\cite{Su2021,gao2019efficient,Fang2019-sillyRubber,Gao2018-GPU-MPM} can be classified into this type. \revised{Gissler et al.~\cite{Gissler2020-snow} simulated the snow with SPH. Their work refers to the visco-elastic model developed by Stomakhin et al.~\cite{Stomakhin2014}} \revised{Bargteil et al.~\cite{Bargteil-2007-AFE} used FEM to simulate the visco-plastic flow. To tackle the potential problem of the ill-conditioned mesh after large deformation, they used a re-mesh procedure.} \revised{Wojtan and Turk~\cite{Wojtan2008} took a similar strategy with Bargteil et al.~\cite{Bargteil-2007-AFE} to simulate the visco-elastic behavior. They carefully distinguished the situation for remeshing. With the spatial adaptivity technique, their algorithm achieves an order-of-magnitude speedup.} \revised{Ozgen et al.~\cite{Ozgen2019} simulated the behavior of shear thickening fluids with SPH model. The key factor in their method is to use a spring to capture the nonlinearity of the non-Newtonian behavior.}
 
 
 \revised{For computer graphics applications, the key to depicting the visual effect of non-Newtonian behaviors is to demonstrate the material’s dynamic characteristics, which can range from fluid-like to solid-like. Therefore, a simulation algorithm must take into account the following key features: 1) variable viscosity (incorporating classical shear-related models), 2) the inclusion of elasticity, and 3) the integration of plasticity.}
@@ -173,7 +174,7 @@ To solve Eq.~\ref{eq:momentum-balance}, we need to focus on the computation of $
 
 We present a Generalized Maxwell Model (GMM) to describe the constitutive relation underlying our unified non-Newtonian framework. \revised{Our inspiration is from the similar model from Fang et al.~\cite{Fang2019-sillyRubber} for viscoelasticity simulation. The Generalized Maxwell Model can be conceptualized as a combination of a spring, a slider, and a dashpot, arranged both in series and parallel. This model comprises two branches: the upper branch features a spring and a slider in series, while the lower branch is composed solely of a dashpot. Each component of the model symbolizes a distinct physical property: the spring represents elasticity, the slider embodies plasticity, and the dashpot signifies viscosity.}
 
-\revised{Assuming that} a material undergoes a specific deformation, it will inherently exhibit some resistance to this deformation. This total resistance is represented by the total stress, denoted as $\sigma_{total}$. In our framework, this total stress effect can be abstracted to the sum of the resistances provided by the upper and lower branches. The resistance from the upper branch is derived from elasto-plasticity, while the resistance from the lower branch arises due to viscosity.
+\revised{Assuming that} a material undergoes a specific deformation, it will inherently exhibit some resistance to this deformation. This total resistance is represented by the total stress, denoted as $\sigma_{total}$. In our framework, this total stress can be abstracted to the sum of the resistances provided by the upper and lower branches. The resistance from the upper branch is derived from elasto-plasticity, while the resistance from the lower branch arises due to viscosity.
 
 \begin{equation}
 	\sigma_{total} = \sigma_{ep} + \sigma_v,
@@ -198,12 +199,12 @@ The relation between stresses and strains for elasto-plasticity is described by 
 		\sigma_p = 0
 	\end{cases},\label{eq:elasto-plastic-constituitive}
 \end{equation}
-where the plastic strain $\varepsilon_{p}$ exhibits zero resistance to deformation, which results in $\sigma_{p}$ always being zero. This is a characteristic of plasticity, where the material enters a state known as 'yielding'. In this state, the material offers no resistance or only mild resistance to deformation. This is the underlying rationale for using a slider to represent plasticity in our Generalized Maxwell model, the slider can move freely without any damping. On the other hand, the elastic constitutive relation is linear due to our adoption of linear elasticity theory, thus we use a spring to represent elasticity. In the upper row of Eq.~\ref{eq:elasto-plastic-constituitive}, $\mathit{K}$ represents a fourth-order stiffness tensor. A visual schematic diagram illustrating the stress-strain relation in a 1D case is presented in Fig.\ref{fig:elasto-plastic-constitution}. Please note that in this one-dimensional diagram, \textit{K} is represented as a scalar coefficient, indicating that \textit{K} represents the slope of the curve before reaching the elastic limit. Further details about elasto-plasticity are discussed in Section \ref{sec:Elasticity-Plasticity}.
+where the plastic strain $\varepsilon_{p}$ exhibits zero resistance to deformation, which results in $\sigma_{p}$ always being zero. This is a characteristic of plasticity, where the material enters a state known as yielding. In this state, the material offers no resistance or only mild resistance to deformation. This is the underlying rationale for using a slider to represent plasticity in our Generalized Maxwell model, the slider can move freely without any damping. On the other hand, the elastic constitutive relation is linear due to our adoption of linear elasticity theory, thus we use a spring to represent elasticity. In the upper row of Eq.~\ref{eq:elasto-plastic-constituitive}, $\mathit{K}$ represents a fourth-order stiffness tensor. A visual schematic diagram illustrating the stress-strain relation in one-dimensional case is presented in Fig.\ref{fig:elasto-plastic-constitution}. Please note that in this one-dimensional diagram, \textit{K} is represented as a scalar coefficient, indicating that \textit{K} represents the slope of the curve before reaching the elastic limit. Further details about elasto-plasticity are discussed in Section \ref{sec:Elasticity-Plasticity}.
 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.35\textwidth]{pics/elasto-plastic-constitution-diagram-1D.png}
+	\includegraphics[width=0.7\linewidth]{pics/stress-strain.png}
 	\caption{Schematic diagram of elasto-plastic constitutive relation in one dimension.}     \label{fig:elasto-plastic-constitution}
 \end{figure}
 
@@ -232,7 +233,7 @@ After the separation, the viscosity model can be viewed as time-independent, and
 \subsection{Variable Viscosity}\label{sec:variable-viscosity}
 
 
-As the viscosity may undergo drastic changes, a stable implicit solver becomes necessary. Therefore, we adapt the implicit viscosity solver from Weiler~\cite{Weiler2018-viscosity}, in which the viscous term can be discretized as follows:
+As the viscosity may undergo drastic changes, a stable implicit solver becomes necessary. Therefore, we adopt the implicit viscosity solver from Weiler~\cite{Weiler2018-viscosity}, in which the viscous term can be discretized as follows:
 
 
 \begin{equation}
@@ -244,15 +245,15 @@ where $\nu=\mu / \rho$ is the kinematic viscosity, and $\mu$ is the dynamic visc
 	\mathbf{v}(t+\Delta t)=\mathbf{v}^*+\frac{\Delta t}{\rho}  \nabla\cdot(\mu \nabla \mathbf{v}(t+\Delta t)).
 \end{equation}
 
-The implicit viscosity solver necessitates a distinct matrix solver. In our simulation, we employ a matrix-free conjugate gradient solver with Jacobian preconditioning. Detailed information can be found in Weiler's work~\cite{Weiler2018-viscosity}.
+The implicit viscosity solver necessitates a distinct matrix solver. In our simulation, we employ a matrix-free conjugate gradient solver with Jacobi preconditioning. Detailed information can be found in Weiler's work~\cite{Weiler2018-viscosity}.
 
 
-Thanks to the separation of visocisty and elasto-plasticity as disscussed in Generalized Maxwell Model in section \ref{sec:govern-eq-and-maxwell}, we could view the viscosity as time-independent. This means the strain rate and stress can be described by a single-value function between strain rate $\dot\epsilon_v$ and viscous stress $\sigma_v$:
+Thanks to the separation of viscosity and elasto-plasticity as discussed in Generalized Maxwell Model in section \ref{sec:govern-eq-and-maxwell}, we could view the viscosity as time-independent. This means the strain rate and stress can be described by a single-value function between strain rate $\dot\epsilon_v$ and viscous stress $\sigma_v$:
 
 \begin{equation}
 	\sigma_v=f\left(\dot{\varepsilon_v}\right),
 \end{equation}
-where $\sigma_v$ is the viscous stress, and $\dot{\varepsilon_v}$ is the viscous strain rate. This relation is non-linear so we use the "$f$" to represent their relation.
+where $\sigma_v$ is the viscous stress, and $\dot{\varepsilon_v}$ is the viscous strain rate. This relation is non-linear so we use the $f$ to represent their relation.
 Since $\mu=d\sigma_v /d\dot{\epsilon_v}$, the effective viscosity can also be expressed as the function of the strain rate, i.e. ,
 
 
@@ -267,12 +268,12 @@ In the following paragraphs, we will introduce six classic strain rate dependent
 Based on the response of stress with respect to strain rate, the time-independent non-Newtonian behaviors into three types: 1) shear-thinning body (also known as pseudo-plastic body); 2) Bingham body without shear-thinning or with shear-thinning (also known as Casson body); and 3) shear-thickening body (also known as dilatant body).
 
 
-Fig.~\ref{fig:rheogram} illustrates the relation between strain rate and viscous stress for different time-independent non-Newtonian behaviors. The slope of the rheogram represents the viscosity. As it is shown, shear-thinning behavior exhibits a decreasing slope as the strain rate increases, while the opposite is observed for shear-thickening behavior. A reheogram curve of the Bingham body has a non-zero intercept on the stress axis, which is the yield stress. Shear-thinning is the most common type of time-independent, non-Newtonian behaviors. Daily necessities, such as ketchup, nail polish, and wall paint, exhibit shear-thinning behaviors.
+Fig.~\ref{fig:rheogram} illustrates the relation between strain rate and viscous stress for different time-independent non-Newtonian behaviors. The slope of the rheogram represents the viscosity. As it is shown, shear-thinning behavior exhibits a decreasing slope as the strain rate increases, while the opposite is observed for shear-thickening behavior. A rheogram curve of the Bingham body has a non-zero intercept on the stress axis, which is the yield stress. Shear-thinning is the most common type of time-independent, non-Newtonian behaviors. Daily necessities, such as ketchup, nail polish, and wall paint, exhibit shear-thinning behaviors.
 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.4\textwidth]{pics/rheogram-new.png}
+	\includegraphics[width=0.8\linewidth]{pics/rheogram-new.png}
 	\caption{Classification of time-independent non-Newtonian behaviors.}
 	\label{fig:rheogram}
 \end{figure}
@@ -283,7 +284,7 @@ Fig.~\ref{fig:rheogram} illustrates the relation between strain rate and viscous
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1\linewidth]{pics/linechart.png}
+	\includegraphics[width=.9\linewidth]{pics/linechart.png}
 	\caption{Different strain rate dependent viscous models. The apparent viscosity changes with the shear rate. \revised{The parameters used in Fig. 5 are listed in Table 4.}}     \label{fig:6NonNewtonsLineChart}
 \end{figure}
 
@@ -311,7 +312,7 @@ The Cross model is superior to Power Law for representing shear thinning behavio
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.4\textwidth]{pics/reverse-S.png}
+	\includegraphics[width=0.8\linewidth]{pics/reverse-S.png}
 	\caption{The reverse-S shape viscosity-shear-rate curve for Cross Model and Carreau Model}     \label{fig:reverse-S}
 \end{figure}
 
@@ -527,13 +528,13 @@ where $T$ is the temperature of the particle. $D$ is the diffusion coefficient, 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.45\textwidth]{pics/cow-new.png}
+	\includegraphics[width=0.9\linewidth]{pics/cow-new.png}
 	\caption{Comparisons of visco-elastic-plastic behaviors (particles view). From left to right, there are three toy cows modeled by MPM~\cite{Fang2019-sillyRubber}, FLIP~\cite{Shao-Huang2022-unsmoothed}, and our unified framework, respectively. The particle color represents magnitude of the instantaneous velocity.}      \label{fig:cow1}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.45\textwidth]{pics/honey_comp.png}
+	\includegraphics[width=0.9\linewidth]{pics/honey_comp.png}
 	\caption{\revised{Comparisons of highly viscous behaviors. From left to right, there are three phenomena of honey dripping modeled by MPM (Fang et al.)~\cite{Fang2019-sillyRubber}, FLIP (Shao et al.)~\cite{Shao-Huang2022-unsmoothed} and our framework, respectively.}}     \label{fig:honey_comp1}
 \end{figure}
 
@@ -608,12 +609,12 @@ While the FLIP model, being a classical viscosity model, naturally exhibits the 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.45\textwidth]{pics/comp-melting-bunny.pdf}
+	\includegraphics[width=0.9\linewidth]{pics/comp-melting-bunny.pdf}
 	\caption{Comparison with ~\cite{Su2021}. Our method (left) is capable of simulating melting and cutting, with higher allowable time step size (5e-3s vs. 1e-4s). }     \label{fig:comp-melting-bunny1}
 \end{figure}
 
 
-Also, we have performed a comparison with Su21~\cite{Su2021} while simulating the classical "melting bunny" scene (as shown in Fig. \ref{fig:comp-melting-bunny1}). In contrast to this scene, our framework accommodates a larger time step size (our average time step size is 5e-3, compared to 1e-4 in~\cite{Su2021}). Moreover, owing to the pure particle framework, our work effectively handles cutting without any additional treatment.  Thanks to our unified particle system, cutting an object is a seamless process without any further complications related to topology changes.
+Also, we have performed a comparison with Su21~\cite{Su2021} while simulating the classical melting bunny scene (as shown in Fig. \ref{fig:comp-melting-bunny1}). In contrast to this scene, our framework accommodates a larger time step size (our average time step size is 5e-3, compared to 1e-4 in~\cite{Su2021}). Moreover, owing to the pure particle framework, our work effectively handles cutting without any additional treatment.  Thanks to our unified particle system, cutting an object is a seamless process without any further complications related to topology changes.
 
 \subsection{Phase Change of Non-Newtonian Materials}
 
@@ -627,7 +628,7 @@ where $T$ is the temperature, heat source $R = 1.0$ (only at surface), $\mu_0 = 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.45\textwidth]{pics/ice-cream.png}
+	\includegraphics[width=0.9\linewidth]{pics/ice-cream.png}
 	\caption{Ice-cream melting. }     \label{fig:ice-cream}
 \end{figure}
 
@@ -645,7 +646,7 @@ As shown in Fig.~\ref{fig:realworld}, we use the Power Law model in Eq.~\ref{eq:
 \begin{figure}[htbp]
 	%\centering
 	\includegraphics[width=0.45\textwidth]{pics/maxviscoandstrainrate.png}
-	\caption{Max viscosity and strain rate norm in every step. Through the change of viscosity and strain rate, we can also clearly see the "rigidity" change at the moment of golf ball contact.
+	\caption{Max viscosity and strain rate norm in every step. Through the change of viscosity and strain rate, we can also clearly see the rigidity change at the moment of golf ball contact.
 	}     \label{fig:dropline}
 \end{figure}
 
@@ -657,7 +658,7 @@ As shown in Fig.~\ref{fig:realworld}, we use the Power Law model in Eq.~\ref{eq:
 
 \begin{figure*}[htbp]
 	\centering
-	\includegraphics[width=1\textwidth]{pics/ketchup.png}
+	\includegraphics[width=.9\textwidth]{pics/ketchup.png}
 	\caption{\revised{Change the fluid to ketchup (which is shear-thinning) and keep other setups the same with golf smashing cornstarch-water mixture case (Fig. 12).}} \label{fig:ketchup}
 \end{figure*}
 
@@ -735,7 +736,6 @@ Fig.\ref{fig:ramp} depicts viscous armadillos with various time-independent non-
 %\revised{It's important to note that the PowerLaw model can be subdivided into PowerLaw1 (shear-thinning) and PowerLaw2 (shear-thickening). This is because adjusting the parameter $n$ can emulate various non-Newtonian behaviors, such as shear-thinning ($n<1$) and shear-thickening ($n>1$). }
 
 \revised{As shown in Fig.~14, it's clear that PowerLaw2 (shear-thickening) exhibits the optimal flowability. This is due to the fact that it simulates shear-thickening behavior, where viscosity escalates with the increase of shear rate. In our experiment, the high-viscosity fluid begins flowing from zero velocity under the influence of gravity, at a relatively low shear rate. At low shear rates, the viscosity remains low. }
-
 \revised{In contrast, PowerLaw1 (shear-thinning) exhibits the least flowability. This is due to its simulation of shear-thinning behavior under the same parameters as PowerLaw2 (with the exception of $n$). Consequently, at low shear rate, the viscosity remains high.}
 
 %\revised{The Bingham model demonstrates moderate flowability, similar to the Newtonian model. The defining feature of the Bingham model is that the fluid exhibits rigidity until the yield point is surpassed. Beyond that, its behavior aligns with that of a typical Newtonian fluid. For the Bingham model, the stress-strain curve beyond the yield point mirrors that of the Newtonian model.}
@@ -747,7 +747,7 @@ Fig.\ref{fig:ramp} depicts viscous armadillos with various time-independent non-
 
 \begin{figure*}[htbp]
 	\centering
-	\includegraphics[width=0.95\textwidth]{pics/ramp.png}
+	\includegraphics[width=0.9\textwidth]{pics/ramp.png}
 	\caption{\revised{Armadillos with different strain-rate-dependent non-Newtonian viscosity model. From left to right: Carreau, Casson, Cross, PowerLaw2, PowerLaw1, Newtonian, Herschel-Bulkley, Bingham. Detailed parameters are listed in Table~\ref{tab:armadillo-params}.}}     \label{fig:ramp}
 \end{figure*}
 
@@ -799,7 +799,7 @@ First, we face the particle deficiency problem that is common to all SPH-based m
   \section*{Acknowledgment}
 \fi
 
-{This work was supported by the National Key R\&D Program of China (2023YFC3604504), National Natural Science Foundation of China (No. 62002010), Beijing Advanced Innovation Center for Biomedical Engineering under Grant (ZF138G1714), CAMS Innovation Fund for Medical Sciences (CIFMS) under Grant (2019-I2M-5-016), and the Beijing Science and Technology Project (No. Z221100007722001, Z231100005923039). This work was also partially supported by USA NSF IIS-1715985 and USA NSF IIS-1812606 (awarded to Hong Qin).
+{This work was supported by the National Key R\&D Program of China (2023YFC3604504), National Natural Science Foundation of China (No. 62002010), CAMS Innovation Fund for Medical Sciences (CIFMS) under Grant (2019-I2M-5-016), and the Beijing Science and Technology Project (No. Z221100007722001, Z231100005923039). This work was also partially supported by USA NSF IIS-1715985 and USA NSF IIS-1812606 (awarded to Hong Qin).
 }
 % ---------------------------------------------------------------------------- %
 %                                 End main body                                %
@@ -813,6 +813,49 @@ First, we face the particle deficiency problem that is common to all SPH-based m
 
 \bibliographystyle{IEEEtran}
 \bibliography{reference}
+
+
+
+% \bibliographystyle{elsarticle-num} 
+% \bibliography{references}
+
+\vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/lcl}}]{Chunlei Li} received the master's degree in Power Engineering and Engineering Thermophysics from Beihang University, in 2021. He is working toward the Ph.D. degree at the State Key Laboratory of Virtual Reality Technology and Systems, Beihang University. His research interests include computer graphics and physics-based simulation. 
+\end{IEEEbiography}
+\vspace{-10 mm}
+
+
+
+  \vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/gy}}]{Yang Gao} received the Ph.D. degree in computer science from Beihang University in 2019. He is currently an associate professor at the State Key Laboratory of Virtual Reality Technology and Systems, Beihang University, Beijing. His research interests include computer graphics, VR/AR interaction, physics-based modeling and simulation. In particular, he is focusing on fluid simulation. 
+\end{IEEEbiography}   
+\vspace{-10 mm}
+
+ \vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/hjy}}]{Jiayi He} received her B.S. degree in computer science from Beihang University in 2023. Her research interests include computer graphics and physics-based simulation.
+\end{IEEEbiography}
+\vspace{-10 mm}
+
+
+ \vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/ctw}}]{Tianwei Cheng} received his master's degree in the State Key Laboratory of Virtual Reality Technology and Systems from Beihang University in 2023. His research interests include computer graphics and physics-based simulation. In particular, he is focusing on viscous fluid simulation. 
+\end{IEEEbiography}
+\vspace{-10 mm}
+
+
+ \vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/ls}}]{Shuai Li} received the Ph.D. degree in computer science from Beihang University. He is currently a professor at the State Key Laboratory of Virtual Reality Technology and Systems, Beihang University. His research interests include computer graphics, physics-based modeling and simulation, virtual surgery simulation, computer vision, and medical image processing. 
+\end{IEEEbiography}
+\vspace{-10 mm}
+
+ \vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/ham}}]{Aimin Hao} is a professor in Computer Science School and the Associate Director of State Key Laboratory of Virtual Reality Technology and Systems at Beihang University. He received his B.S., M.S., and Ph.D. in Computer Science at Beihang University. His research interests are in virtual reality, computer simulation, computer graphics, geometric modeling, image processing, and computer vision. 
+\end{IEEEbiography}  
+\vspace{-10 mm}
+
+ \vspace{-10 mm}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/qh}}]{Hong Qin} received his B.S. and M.S. degrees in computer science from Peking University, and his Ph.D. degree in computer science from the University of Toronto. He is a professor of computer science in Department of Computer Science at Stony Brook University. His research interests include geometric and solid modeling, graphics, physics-based modeling and simulation, computer-aided geometric design, human computer interaction, visualization, and scientific computing. He is a senior member of the IEEE and the IEEE Computer Society.
+\end{IEEEbiography}
 
 
 \end{document}
