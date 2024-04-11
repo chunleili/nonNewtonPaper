@@ -10,4 +10,4 @@ DOI: [10.1109/TVCG.2023.3341453](https://ieeexplore.ieee.org/document/10354362)
 
 Latex and presentation: https://github.com/chunleili/nonNewtonPaper
 
-Code: [https://github.com/chunleili/nonNewtonCode](https://github.com/chunleili/nonNewtonCode)https://github.com/chunleili/nonNewtonCode
+Code: [https://github.com/chunleili/nonNewtonCode](https://github.com/chunleili/nonNewtonCode)
