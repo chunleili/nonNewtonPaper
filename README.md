@@ -1,6 +1,10 @@
-This is the latex source and presentation of 2023 TVCG paper entitled "A Unified Particle-Based Solver for non-Newtonian Behaviors Simulation".
+# A Unified Particle-Based Solver for non-Newtonian Behaviors Simulation
+
+This is the latex source and presentation of 2024 TVCG paper entitled "A Unified Particle-Based Solver for non-Newtonian Behaviors Simulation".
 
 Authors: Chunlei Li, Yang Gao , Jiayi He, Tianwei Cheng, Shuai Li, Aimin Hao, Hong Qin
+
+<img width="1920" height="1080" alt="nonNewton-teaser" src="https://github.com/user-attachments/assets/8d14d066-e5f1-473b-9125-9cc8d84861ff" />
 
 [project page](https://chunleili.github.io/project-page-nonNewton/)
 
